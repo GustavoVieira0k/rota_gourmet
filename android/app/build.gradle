@@ -1,0 +1,53 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin" // Flutter plugin vem antes do Google Services
+    id 'com.google.gms.google-services'
+}
+
+android {
+    namespace "rota_gourmet.a2402"
+    compileSdkVersion 34  // Substitua por um número (ex: 33)
+    ndkVersion "27.2.12479018"
+
+    defaultConfig {
+        applicationId "rota_gourmet.a2402" // Nome de pacote válido
+        minSdkVersion 21       // Valor mínimo de SDK (ajuste conforme necessário)
+        targetSdkVersion 34    // Valor alvo do SDK (ajuste conforme necessário)
+        versionCode 1          // Atualize conforme necessário
+        versionName "1.0"      // Atualize conforme necessário
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    // Evita conflitos de dependências do Firebase
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+    }
+}
+
+flutter {
+    source "../.."
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.9.0')
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+}
